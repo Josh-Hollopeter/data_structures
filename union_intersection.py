@@ -32,6 +32,18 @@ class LinkedList:
 
         node.next = Node(value)
 
+    def prepend(self, value):
+        """ Prepend a value to the beginning of the list. """
+        if (self.head == None):
+            self.head = Node(value)
+            return
+
+        node = Node(value)
+        node.next = self.head
+        node.next.next = self.head.next
+        self.head = node
+        pass
+
     def size(self):
         size = 0
         node = self.head
@@ -42,12 +54,35 @@ class LinkedList:
         return size
 
 def union(llist_1, llist_2):
-    # FIXXME
-    pass
+    node1 = llist_1.head
+    node2 = llist_2.head
+    result = LinkedList()
+    while node1 != None:
+        result.prepend(node1.value)
+        node1 = node1.next
+
+    while node2 != None:
+        if not present(result.head, node2.value):
+            result.prepend(node2.value)
+        node2 = node2.next
+    return result
+        
 
 def intersection(llist_1, llist_2):
     # FIXXME
     pass
+
+def present(head, value):
+    
+    cur_head = head
+    while cur_head != None: 
+        print(cur_head.value)
+        if cur_head.value == value:
+            return True; 
+        cur_head = cur_head.next; 
+    print("here") 
+    return False; 
+     
 
 
 # Test case 1
